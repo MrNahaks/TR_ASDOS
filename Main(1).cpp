@@ -140,6 +140,8 @@ glLoadIdentity();
 gluPerspective(50.0,lebar / tinggi, 2.0,200.0);
 glTranslatef(0.0, -5.0, -150.0);
 glMatrixMode(GL_MODELVIEW);
+	
+	//coba tambah line code
 
 
 }
