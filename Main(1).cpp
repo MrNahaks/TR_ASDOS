@@ -69,6 +69,9 @@ void tampil(void){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 else
     glClear(GL_COLOR_BUFFER_BIT);
+	
+    glRotatef(xrot,1.0f,0.0f,0.0f);
+    glRotatef(yrot,0.0f,1.0f,0.0f);
 
 
 
