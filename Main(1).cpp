@@ -1,5 +1,5 @@
 #include<windows.h>
-#ifdef _APPLE_
+#ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
@@ -10,9 +10,17 @@
 
 void init(void);
 void tampil(void);
-void keyboard(unsigned char, int, int);
+void mouse(int button , int state,int x,int y);
+void mouseMotion(int x , int y);
 void ukuran(int,int);
 
+void keyboard(unsigned char,int,int);
+
+float xrot = 0.0f;
+float yrot = 0.0f;
+float xdiff = 0.0f;
+float ydiff = 0.0f;
+bool mouseDown = false;
 
 
 int is_depth;
@@ -21,20 +29,31 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE| GLUT_RGB);
-	glutInitWindowSize(1280,720);
-	glutInitWindowPosition(250,80);
-	glutCreateWindow("3D");
-	init();
+	glutInitWindowSize(800,600);
+	glutInitWindowPosition(900,80);
+	glutCreateWindow("Ardito Laksono Suryoputro-672019057");
+
 	glutDisplayFunc(tampil);
-    glutKeyboardFunc(keyboard);
+	glutMouseFunc(mouse);
+	glutMotionFunc(mouseMotion);
+	glutKeyboardFunc(keyboard);
 	glutReshapeFunc(ukuran);
+	init();
+
+
+
+
+	glutIdleFunc(tampil);
 	glutMainLoop();
 	return 0;
 }
 
 void init(void){
-glClearColor(0,0,0,0);
+glClearColor(171/255.f,222/255.f,253/255.f,1);
 glMatrixMode(GL_PROJECTION);
+glEnable(GL_LIGHTING);
+glEnable(GL_COLOR_MATERIAL);
+glEnable(GL_LIGHT0);
 glEnable(GL_DEPTH_TEST);
 is_depth=1;
 glMatrixMode(GL_MODELVIEW);
@@ -42,22 +61,17 @@ glPointSize(9.0);
 glLineWidth(6.0f);
 }
 
+
+
 void tampil(void){
-    if (is_depth)
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    else
-        glClear(GL_COLOR_BUFFER_BIT);
-
-    //lantai
-    glBegin(GL_QUADS);
-    glColor3f(1,1,1);
-    glVertex3f(0.0,0.0,0.0);
-    glVertex3f(140.0,0.0,0.0);
-    glVertex3f(140.0,240.0,0.0);
-    glVertex3f(0.0,240.0,0.0);
-    glEnd();
-
     glPushMatrix();
+   if(is_depth)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+else
+    glClear(GL_COLOR_BUFFER_BIT);
+
+
+
     glPopMatrix();
 
     glutSwapBuffers();
@@ -130,18 +144,58 @@ case '5':
         glEnable(GL_DEPTH_TEST);
     }
 }
+
 tampil();
 }
+
+void idle(){
+if(!mouseDown){
+
+    xrot += 0.3f;
+    yrot += 0.4f;
+}
+glutPostRedisplay();
+}
+
+void mouseMotion(int x, int y) {
+	if (mouseDown) {
+		yrot = x - xdiff;
+		xrot = y + ydiff;
+
+		glutPostRedisplay();
+	}
+}
+
+void mouse(int button , int state , int x , int y){
+
+if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN){
+    mouseDown = true;
+    xdiff = x - yrot;
+    ydiff = -y +xrot;
+}else mouseDown = false;
+
+}
+
 void ukuran(int lebar , int tinggi){
 if(tinggi == 0 ) tinggi = 1;
 
 glMatrixMode(GL_PROJECTION);
 glLoadIdentity();
-gluPerspective(50.0,lebar / tinggi, 2.0,200.0);
+gluPerspective(80.0,lebar / tinggi, 5.0,500.0);
 glTranslatef(0.0, -5.0, -150.0);
 glMatrixMode(GL_MODELVIEW);
-	
-	//coba tambah line code
+
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
