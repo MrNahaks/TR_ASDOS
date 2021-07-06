@@ -235,19 +235,32 @@ void tampil(void) {
     kotak(4, 32, 11, -175, 0, 0, 0, 0, 1.5, 6, 0.1);
 
 
+    //bangun coklat
+    glColor3ub(89, 45, 0);
+    kotak(15, 62, 7.5, 30, 0, 0, 0, 0, 1.3, 5, 1.5);
+
+    //bangun ungu
+    glColor3ub(112, 123, 211);
+    kotak(15, 40, 7.5, 8, 0, 0, 0, 0, 2, 2, 2.5);
+
+    //bangun merah
+    glColor3ub(255, 0, 0);
+    kotak(15, 62, 7.5, -6.5, 0, 0, 0, 0, 1.5, 3.5, 3);
+
+    //bangun pink
+    glColor3ub(255, 0, 255);
+    kotak(15, 35, 5, -6.5, 0, 0, 0, 0, 2, 2, 3);
 
 
+    //bangun hijau
+    glColor3ub(0, 255, 0);
+    kotak(15, 135, 7.5, -25, 0, 0, 0, 0, 0.8, 3.3, 0.8);
 
+    //bangun atas kuning
+    glColor3ub(255, 255, 0);
+    kotak(10, 19, 17, 1, 0, 0, 0, 0, 1.4, 3.7, 1.5);
 
-
-
-
-
-
-
-
-
-
+    kotak(10, 1, 17, 1, 0, 0, 0, 0, 1.4, 3.7, 1.5);
 
 
 
