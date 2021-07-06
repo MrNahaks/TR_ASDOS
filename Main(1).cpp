@@ -31,7 +31,7 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(1280, 720);
     glutInitWindowPosition(400, 80);
-    glutCreateWindow("Ardito Laksono Suryoputro-672019057");
+    glutCreateWindow("Gradski trgovski centar");
 
     glutDisplayFunc(tampil);
     glutMouseFunc(mouse);
