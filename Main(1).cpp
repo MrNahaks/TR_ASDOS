@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 //KiryuKazuma69 - 672019034
-//genter01 - 672019041 
+//genter01 - 672019041
 //MrNahaks - 672019055
 //arditolaksono - 672019057
 
@@ -141,15 +141,7 @@ void timer(int value) {
         }
     }
 
-
-
-
-
-
 }
-
-
-
 
 void tampil(void) {
     glPushMatrix();
@@ -183,7 +175,7 @@ void tampil(void) {
     bidang(10,3,-100,0,120,270,1,0,0,1,1,1);
     //mobil
     glColor3ub(91,209,211);
-    kotak(10,c1,5,170,0,0,0,0,1.3,1,0.7);
+    kotak(10,c1,5,185,0,0,0,0,1.3,1,0.7);
 
 
     //kotak samping kiri
@@ -458,6 +450,25 @@ kotak(10, -120, 5, -3, 0, 0, 0, 0, 0.5, 0.4, 4);
     glColor3ub(255, 255, 255);
     kotak(10, 10, 33, -56.5, 0, 0, 0, 0, 1.65, 0.75, 0.25);
 
+    //Meja
+    glColor3ub(204, 88, 20);
+    kotak(10, 20, 5, 10, 0, 0, 0, 0, 2.0, 0.70, 0.40);
+    glColor3ub(171, 164, 161);
+    kotak(10, 20, 70, 10, 0, 0, 0, 0, 2.0, 0.10, 0.40);
+
+    //Pemanggang Roti
+    glColor3ub(73, 55, 173);
+    kotak(5, 96, 18, 6.5, 0, 0, 0, 0, 0.50, 0.5, 0.60);
+    glColor3ub(171, 164, 161);
+    kotak(5, 485, 205, 7.5, 0, 0, 0, 0, 0.10, 0.05, 0.50);
+    glColor3ub(171, 164, 161);
+    kotak(5, 475, 205, 7.5, 0, 0, 0, 0, 0.10, 0.05, 0.50);
+
+    //Lemari Meja
+    glColor3ub(73, 55, 173);
+    kotak(5, 34, 7, 5, 0, 0, 0, 0, 1.0, 1.80, 0.80);
+    glColor3ub(168, 75, 3);
+    kotak(5, 38, 14, 37, 0, 0, 0, 0, 0.90, 1.0, 0.05);
 
 
     glPopMatrix();
@@ -465,9 +476,6 @@ kotak(10, -120, 5, -3, 0, 0, 0, 0, 0.5, 0.4, 4);
     glutSwapBuffers();
 
 }
-
-
-
 
 void keyboard(unsigned char key, int x, int y) {
 
@@ -580,12 +588,3 @@ void ukuran(int lebar, int tinggi) {
 
 
 }
-
-
-
-
-
-
-
-
-
