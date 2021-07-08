@@ -18,6 +18,7 @@ void tampil(void);
 void mouse(int button, int state, int x, int y);
 void mouseMotion(int x, int y);
 void ukuran(int, int);
+void timer(int value);
 
 void keyboard(unsigned char, int, int);
 
@@ -26,6 +27,13 @@ float yrot = 0.0f;
 float xdiff = 0.0f;
 float ydiff = 0.0f;
 bool mouseDown = false;
+bool toRight = true;
+bool toLeft = false;
+float inc = 1;
+float c1 = 0;
+float c2 = 95;
+
+
 
 
 int is_depth;
@@ -36,13 +44,14 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(1280, 720);
     glutInitWindowPosition(400, 80);
-    glutCreateWindow("Gradski Trgovski Centar");
+    glutCreateWindow("Gradski trgovski centar");
 
     glutDisplayFunc(tampil);
     glutMouseFunc(mouse);
     glutMotionFunc(mouseMotion);
     glutKeyboardFunc(keyboard);
     glutReshapeFunc(ukuran);
+    glutTimerFunc(0, timer, 0);
     init();
 
 
@@ -64,14 +73,17 @@ void init(void) {
     glMatrixMode(GL_MODELVIEW);
     glPointSize(9.0);
     glLineWidth(6.0f);
+
+
 }
 
-void bidang(GLfloat w, GLfloat h, GLfloat x, GLfloat y, GLfloat z, GLfloat sudut, GLfloat x1, GLfloat y1, GLfloat z1) {
+void bidang(GLfloat w, GLfloat h, GLfloat x, GLfloat y, GLfloat z, GLfloat sudut, GLfloat x1, GLfloat y1, GLfloat z1,GLfloat x2, GLfloat y2, GLfloat z2) {
 
 
     glPushMatrix();
     glTranslatef(x, y, z);
     glRotatef(sudut, x1, y1, z1);
+    glScalef(x2, y2, z2);
     glBegin(GL_QUADS);
     glVertex3f(w, h, 0);
     glVertex3f(w, -h, 0);
@@ -109,6 +121,36 @@ void persegigedung(GLfloat x, GLfloat y, GLfloat z) {
 
 }
 
+void timer(int value) {
+    glutTimerFunc(1200/60,timer, 0);
+    if (c1 >= 0 && c1<=90 && toRight )
+        {
+            c1 += inc;
+            if(c1 == 90) {
+                    toRight = false;
+                    toLeft = true;
+            }
+        }
+
+    if(c1 <= 90 && c1 >= 0 && toLeft){
+        c1 -= inc;
+        if(c1==0){
+                toRight = true;
+                toLeft = false;
+
+        }
+    }
+
+
+
+
+
+
+}
+
+
+
+
 void tampil(void) {
     glPushMatrix();
     if (is_depth)
@@ -116,13 +158,34 @@ void tampil(void) {
     else
         glClear(GL_COLOR_BUFFER_BIT);
 
+
+
     glRotatef(xrot, 1.0f, 0.0f, 0.0f);
     glRotatef(yrot, 0.0f, 1.0f, 0.0f);
 
 
     //latar bawah
-    glColor3f(205/255, 203/255, 175/255);
-    kotak(100, 6, 0, 0, 0, 0, 0, 0, 2.5, 0.01, 1.5);
+    glColor3ub(205,203,175);
+    bidang(130,120,20,-2,20,270,1,0,0,1,1,1);
+    //jalan
+    glColor3ub(0,0,0);
+    bidang(130,20,20,-1,120,270,1,0,0,1,1,1);
+    //garisjalan
+    glColor3f(1,1,1);
+    bidang(10,3,140,0,120,270,1,0,0,1,1,1);
+    bidang(10,3,110,0,120,270,1,0,0,1,1,1);
+    bidang(10,3,80,0,120,270,1,0,0,1,1,1);
+    bidang(10,3,50,0,120,270,1,0,0,1,1,1);
+    bidang(10,3,20,0,120,270,1,0,0,1,1,1);
+    bidang(10,3,-10,0,120,270,1,0,0,1,1,1);
+    bidang(10,3,-40,0,120,270,1,0,0,1,1,1);
+    bidang(10,3,-70,0,120,270,1,0,0,1,1,1);
+    bidang(10,3,-100,0,120,270,1,0,0,1,1,1);
+    //mobil
+    glColor3ub(91,209,211);
+    kotak(10,c1,5,170,0,0,0,0,1.3,1,0.7);
+
+
     //kotak samping kiri
     glColor3f(82 / 255.f, 12 / 255.f, 1 / 255.f);
     kotak(20, -60, 10, 15, 0, 0, 0, 0, 1, 0.6, 1.5);
@@ -221,7 +284,7 @@ kotak(10, -120, 5, -3, 0, 0, 0, 0, 0.5, 0.4, 4);
 
   //jendela
     glColor3ub(255, 255, 255);
-    
+
     //Kuning 3 Belakang
     kotak(4, -16, 11, -175, 0, 0, 0, 0, 1.5, 6, 0.1);
     kotak(4, -10.5, 11, -175, 0, 0, 0, 0, 1.5, 6, 0.1);
@@ -249,7 +312,7 @@ kotak(10, -120, 5, -3, 0, 0, 0, 0, 0.5, 0.4, 4);
 
     kotak(4, 27, 5, -420, 0, 0, 0, 0, 1.5, 6, 0.1);
     kotak(4, 32, 5, -420, 0, 0, 0, 0, 1.5, 6, 0.1);
-    
+
     //Kuning 2 Atas
 
     kotak(4, 20, 11, -60, 0, 0, 0, 0, 1.5, 6, 0.1);
@@ -276,7 +339,7 @@ kotak(10, -120, 5, -3, 0, 0, 0, 0, 0.5, 0.4, 4);
 
     kotak(4, -33.5, 10, 908, 90, 0, 1, 0, 1.5, 6, 0.1);
     kotak(4, -26.5, 10, 908, 90, 0, 1, 0, 1.5, 6, 0.1);
-    
+
     kotak(4, -33.5, 5, 908, 90, 0, 1, 0, 1.5, 6, 0.1);
     kotak(4, -26.5, 5, 908, 90, 0, 1, 0, 1.5, 6, 0.1);
 
@@ -320,7 +383,7 @@ kotak(10, -120, 5, -3, 0, 0, 0, 0, 0.5, 0.4, 4);
     //Ungu
     kotak(4, -11.5, 17.5, 950, 90, 0, 1, 0, 2.5, 1.25, 0.1);
     kotak(4, -5.5, 17.5, 950, 90, 0, 1, 0, 2.5, 1.25, 0.1);
-    
+
     kotak(4, -11.5, 10.5, 950, 90, 0, 1, 0, 2.5, 1.25, 0.1);
     kotak(4, -5.5, 10.5, 950, 90, 0, 1, 0, 2.5, 1.25, 0.1);
 
@@ -394,7 +457,7 @@ kotak(10, -120, 5, -3, 0, 0, 0, 0, 0.5, 0.4, 4);
     //AC
     glColor3ub(255, 255, 255);
     kotak(10, 10, 33, -56.5, 0, 0, 0, 0, 1.65, 0.75, 0.25);
-    
+
 
 
     glPopMatrix();
@@ -402,6 +465,9 @@ kotak(10, -120, 5, -3, 0, 0, 0, 0, 0.5, 0.4, 4);
     glutSwapBuffers();
 
 }
+
+
+
 
 void keyboard(unsigned char key, int x, int y) {
 
@@ -514,7 +580,6 @@ void ukuran(int lebar, int tinggi) {
 
 
 }
-
 
 
 
