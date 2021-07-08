@@ -7,6 +7,11 @@
 
 #include <stdlib.h>
 
+//KiryuKazuma69 - 672019034
+//genter01 - 672019041 
+//MrNahaks - 672019055
+//arditolaksono - 672019057
+
 
 void init(void);
 void tampil(void);
@@ -31,7 +36,7 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(1280, 720);
     glutInitWindowPosition(400, 80);
-    glutCreateWindow("Gradski trgovski centar");
+    glutCreateWindow("Gradski Trgovski Centar");
 
     glutDisplayFunc(tampil);
     glutMouseFunc(mouse);
@@ -104,21 +109,12 @@ void persegigedung(GLfloat x, GLfloat y, GLfloat z) {
 
 }
 
-
-
-
 void tampil(void) {
     glPushMatrix();
     if (is_depth)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     else
         glClear(GL_COLOR_BUFFER_BIT);
-
-
-
-
-
-
 
     glRotatef(xrot, 1.0f, 0.0f, 0.0f);
     glRotatef(yrot, 0.0f, 1.0f, 0.0f);
